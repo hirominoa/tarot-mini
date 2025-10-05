@@ -3,176 +3,213 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🌙きょうのタロット | Lunaria</title>
-<meta name="description" content="Lunariaのワンカード占い🔮ボタンひとつで正位置・逆位置つきのメッセージが届きます🌙">
+  <title>Lunaria 🌙 きょうのタロット</title>
+  <meta name="description" content="Lunariaのワンカード占い🔮　ボタンひとつで今日のメッセージが届きます。">
   <style>
     :root {
-  --bg: linear-gradient(180deg, #f9f5ff 0%, #f0e9ff 50%, #dce7ff 100%);
-  --panel: rgba(255,255,255,0.7);
-  --text: #3b3054;
-  --muted: #6d5c7a;
-  --accent: #d5a8ff;
-  --accent2: #a3d8ff;
-  --good: #6bbf59;
-  --bad: #e57373;
-  --shadow: 0 8px 20px rgba(150, 130, 255, 0.25);
-  --radius: 18px;
+      --bg: linear-gradient(180deg, #f9f5ff 0%, #f0e9ff 50%, #dce7ff 100%);
+      --panel: rgba(255, 255, 255, 0.7);
+      --text: #3b3054;
+      --muted: #6d5c7a;
+      --accent: #d5a8ff;
+      --accent2: #a3d8ff;
+      --good: #6bbf59;
+      --bad: #e57373;
+      --shadow: 0 8px 20px rgba(150, 130, 255, 0.25);
+      --radius: 18px;
+    }
 
+    * {
+      box-sizing: border-box;
     }
-    *{box-sizing:border-box}
-    html,body{
-      height:100%;
-      margin:0;
-      color:var(--text);
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      color: var(--text);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
-      
-        background: var(--bg);
-　　　　　background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.3) 1px, transparent 1px),
-                　　　　　  radial-gradient(circle at 90% 80%, rgba(255,255,255,0.2) 2px, transparent 2px);
-　　　　　background-size: 200px 200px;
-       　　　　　　　　　　　　 radial-gradient(1200px 600px at 10% -10%, rgba(122,225,255,.18), transparent 60%),
-        　　　　　　　　　　　　radial-gradient(1200px 600px at 90% 110%, rgba(168,139,255,.20), transparent 60%),
-        var(--bg);
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.3) 1px, transparent 1px),
+        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.2) 2px, transparent 2px);
+      background-size: 200px 200px;
     }
-    .wrap{
-      max-width:960px;
-      margin:0 auto;
-      padding:24px 18px 64px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:24px;
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 18px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
     }
-    header{
-      text-align:center;
+
+    header {
+      text-align: center;
     }
-    h1{
-      font-size: clamp(22px, 3.2vw, 34px);
+
+    h1 {
+      font-size: clamp(24px, 3.2vw, 38px);
       margin: 6px 0 4px;
-      letter-spacing:.04em;
+      letter-spacing: .05em;
+      background: linear-gradient(90deg, #a88bff, #7ae1ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .sub{
-      color:var(--muted);
-      font-size:14px;
+
+    .sub {
+      color: var(--muted);
+      font-size: 14px;
     }
-    .board{
-      display:grid;
+
+    .board {
+      display: grid;
       grid-template-columns: 1fr;
-      gap:18px;
-      width:min(720px, 100%);
+      gap: 18px;
+      width: min(720px, 100%);
     }
-    @media (min-width:800px){
-      .board{grid-template-columns: 320px 1fr}
+
+    @media (min-width: 800px) {
+      .board {
+        grid-template-columns: 320px 1fr;
+      }
     }
-    .card-stage{
+
+    .card-stage {
       perspective: 1200px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .card{
+
+    .card {
       width: 280px;
       height: 440px;
       border-radius: 14px;
       position: relative;
       box-shadow: var(--shadow);
       transform-style: preserve-3d;
-      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+      transition: transform .8s cubic-bezier(.2, .8, .2, 1);
     }
-    .card.flip{ transform: rotateY(180deg) }
-    .face{
-      position:absolute; inset:0;
-      border-radius: 14px;
-      backface-visibility: hidden;
-      display:flex; align-items:center; justify-content:center;
-      text-align:center;
-      padding:20px;
-    }
-    .front{
-      background: linear-gradient(135deg,#262b55,#17182e);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-    .back{
-      background: linear-gradient(135deg,#1b1e3f,#0f1129);
-      border: 1px solid rgba(255,255,255,.08);
+
+    .card.flip {
       transform: rotateY(180deg);
     }
-    .sigil{
+
+    .face {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .front {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(240, 235, 255, 0.9));
+      border: 1px solid rgba(255, 255, 255, .5);
+    }
+
+    .back {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(250, 245, 255, 0.9));
+      border: 1px solid rgba(150, 130, 255, .3);
+      transform: rotateY(180deg);
+    }
+
+    .sigil {
       width: 85%;
       height: 85%;
-      border: 2px dashed rgba(255,255,255,.12);
+      border: 2px dashed rgba(150, 130, 255, .4);
       border-radius: 10px;
-      display:flex; align-items:center; justify-content:center;
-      letter-spacing:.1em;
-      color: #cfd5ff;
-      font-weight:700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: .1em;
+      color: #8b7ff7;
+      font-weight: 700;
+      font-size: 24px;
     }
-    .card-title{
+
+    .card-title {
       font-size: 20px;
-      margin:0 0 6px;
-      line-height:1.3;
+      margin: 0 0 6px;
+      line-height: 1.3;
     }
-    .orientation{
-      font-size: 12px;
-      color:var(--muted);
-      letter-spacing:.08em;
-      margin-bottom:10px;
+
+    .orientation {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      margin-bottom: 10px;
     }
-    .meaning{
-      font-size: 14px;
-      line-height:1.7;
-      color:#dfe3ff;
-      text-align:left;
+
+    .meaning {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #4a3e60;
+      text-align: left;
       max-height: 300px;
-      overflow:auto;
-      padding-right:4px;
+      overflow: auto;
+      padding-right: 4px;
     }
-    .panel{
-      background: rgba(23,24,46,.66);
-      border: 1px solid rgba(255,255,255,.08);
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(150, 130, 255, 0.2);
       border-radius: var(--radius);
-      padding:16px;
+      padding: 16px;
       box-shadow: var(--shadow);
     }
-    .actions{
-      display:flex;
-      gap:12px; flex-wrap:wrap;
-      align-items:center;
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
     }
-    button{
-      cursor:pointer;
-      border:none;
-      padding:12px 18px;
+
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 12px 18px;
       border-radius: 12px;
-      font-size:16px;
-      color:#0b0d19;
-      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       transition: transform .05s ease, filter .2s;
+      box-shadow: 0 4px 10px rgba(150, 130, 255, 0.3);
     }
-    button:active{ transform: translateY(2px) }
-    button:focus-visible{ outline: 2px solid white; outline-offset:2px }
-    .note{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
+
+    button:active {
+      transform: translateY(2px);
     }
-    .meta{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:6px;
+
+    button:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 2px;
     }
-    .fade-in{
-      animation: fade .35s ease both;
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
     }
-    @keyframes fade{
-      from{opacity:0; transform:translateY(4px)}
-      to{opacity:1; transform:translateY(0)}
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
     }
-    .footer{
-      margin-top:8px;
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
+
+    .footer {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
     }
   </style>
 </head>
@@ -204,82 +241,4 @@
         <div class="actions">
           <button id="drawBtn" type="button" aria-controls="cardTitle meaning orientation">一枚引く 🔮</button>
           <span id="resultMeta" class="meta" aria-live="polite"></span>
-        </div>
-        <p class="note">
-          占いは「今の自分を映す鏡」。深刻に決めすぎず、ヒントとして楽しんでくださいね。<br>
-          逆位置は「ブレーキの場所」や「視点の転換」を示すこともあります。
-        </p>
-      </section>
-    </div>
 
-<div class="footer">© 2025 Lunaria / Inner Light Works</div>
-  </div>
-
-<script>
-// ----- Tarot Major Arcana (short meanings) -----
-const DECK = [
-  { n:0, name:"0 愚者 (The Fool)", up:"自由・無邪気・新しい旅立ち。直感に従う。", rev:"衝動・無計画・現実逃避。足元を見直す。" },
-  { n:1, name:"I 魔術師 (The Magician)", up:"スタート・創造・コミュ力。道具は揃っている。", rev:"未熟・準備不足・器用貧乏。まず1つに集中。" },
-  { n:2, name:"II 女教皇 (The High Priestess)", up:"静けさ・知性・洞察。情報をよく読む。", rev:"感情過多・秘密・不安定。クールダウンを。" },
-  { n:3, name:"III 女帝 (The Empress)", up:"豊かさ・愛・育成。受け取る力。", rev:"甘やかし・過多・停滞。境界線を整える。" },
-  { n:4, name:"IV 皇帝 (The Emperor)", up:"安定・責任・リーダーシップ。決める時。", rev:"独裁・頑固・過管理。信頼して委ねる。" },
-  { n:5, name:"V 法王 (The Hierophant)", up:"伝統・学び・信頼。良き師との縁。", rev:"形式主義・固定観念。自分のやり方を試す。" },
-  { n:6, name:"VI 恋人 (The Lovers)", up:"選択・相思・価値観の一致。心のYESを。", rev:"優柔不断・迷い・三者。原点の選択基準へ。" },
-  { n:7, name:"VII 戦車 (The Chariot)", up:"前進・勝利・勢い。迷う前に動く。", rev:"空回り・焦り・分裂。方向合わせを先に。" },
-  { n:8, name:"VIII 力 (Strength)", up:"内なる強さ・慈愛・習慣化。静かな継続。", rev:"我慢のし過ぎ・自己否定。優しく整える。" },
-  { n:9, name:"IX 隠者 (The Hermit)", up:"探求・省察・一人時間。灯りは内側に。", rev:"孤立・閉塞・答えが遠い。人に訊く勇気を。" },
-  { n:10, name:"X 運命の輪 (Wheel of Fortune)", up:"転機・チャンス・流れに乗る。", rev:"停滞・タイミング合わず。焦らず整える。" },
-  { n:11, name:"XI 正義 (Justice)", up:"バランス・契約・公平。事実と向き合う。", rev:"不均衡・迷い・曖昧。基準を明確に。" },
-  { n:12, name:"XII 吊るされた男 (Hanged Man)", up:"献身・俯瞰・視点変更。待つ価値あり。", rev:"自己犠牲過多・停滞。手放す選択を。" },
-  { n:13, name:"XIII 死神 (Death)", up:"区切り・終わりと始まり。刷新の好機。", rev:"変化拒否・惰性。小さく終わらせて空ける。" },
-  { n:14, name:"XIV 節制 (Temperance)", up:"調和・節度・試行錯誤。ブレンドが鍵。", rev:"極端・過不足。ペース配分の再設計。" },
-  { n:15, name:"XV 悪魔 (The Devil)", up:"依存・魅了・快楽。仕組みの見直しを。", rev:"解放の兆し・執着ゆるむ。距離を置く。" },
-  { n:16, name:"XVI 塔 (The Tower)", up:"崩壊・雷・目覚め。偽りが落ちる。", rev:"被害最小・ヒビの修繕。学びを糧に。" },
-  { n:17, name:"XVII 星 (The Star)", up:"希望・インスピ・癒し。遠くの灯り。", rev:"期待過多・散漫。目標を具体化。" },
-  { n:18, name:"XVIII 月 (The Moon)", up:"直感・無意識・夢。夜明け前の揺らぎ。", rev:"疑心暗鬼・誤解。情報を明確に。" },
-  { n:19, name:"XIX 太陽 (The Sun)", up:"成功・活力・喜び。子どものように。", rev:"空回り・過信。基本に立ち返る。" },
-  { n:20, name:"XX 審判 (Judgement)", up:"再生・呼び覚まし・復活。届け、声。", rev:"遅延・未完了。未返信に返事を。" },
-  { n:21, name:"XXI 世界 (The World)", up:"成就・完成・統合。次の章へ。", rev:"未完・あと一歩。締めの一手を。" }
-];
-
-const cardEl = document.querySelector('.card');
-const titleEl = document.getElementById('cardTitle');
-const orientEl = document.getElementById('orientation');
-const meaningEl = document.getElementById('meaning');
-const metaEl = document.getElementById('resultMeta');
-const btn = document.getElementById('drawBtn');
-
-function drawOne(){
-  // flip animation
-  cardEl.classList.remove('flip');
-  void cardEl.offsetWidth; // reflow to restart animation
-
-  // choose random card
-  const idx = Math.floor(Math.random()*DECK.length);
-  const reversed = Math.random() < 0.5;
-  const card = DECK[idx];
-
-  // set content (after a tiny delay so flip looks nice)
-  setTimeout(()=>{
-    titleEl.textContent = card.name;
-    orientEl.textContent = reversed ? "逆位置" : "正位置";
-    orientEl.style.color = reversed ? "var(--bad)" : "var(--good)";
-    meaningEl.textContent = reversed ? card.rev : card.up;
-    metaEl.textContent = `#${card.n}・${new Date().toLocaleString('ja-JP')}`;
-    cardEl.classList.add('flip');
-  }, 80);
-}
-
-btn.addEventListener('click', drawOne);
-
-// Keyboard shortcut: Enter/Space draws a card when button focused
-btn.addEventListener('keydown', (e)=>{
-  if(e.key === 'Enter' || e.key === ' '){
-    e.preventDefault();
-    drawOne();
-  }
-});
-
-</script>
-</body>
-</html>
