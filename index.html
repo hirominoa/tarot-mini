@@ -6,13 +6,6 @@
   <title>Lunaria 🌙 きょうのタロット</title>
   <meta name="description" content="Lunariaのワンカード占い🔮　ボタンひとつで今日のメッセージが届きます。">
   <style>
-    .affirm {
-  margin: 8px 0 0;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  color: var(--text);
-}
     :root {
       --bg: linear-gradient(180deg, #f9f5ff 0%, #f0e9ff 50%, #dce7ff 100%);
       --panel: rgba(255, 255, 255, 0.7);
@@ -73,6 +66,15 @@
     .note{ color:var(--muted); font-size:13px; line-height:1.7 }
     .meta{ font-size:12px; color:var(--muted); margin-top:6px }
     .footer{ margin-top:16px; text-align:center; color:var(--muted); font-size:12px }
+
+    /* 🌟 自分全肯定メッセージ */
+    .affirm {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #d65db1;
+      margin-top: 12px;
+    }
   </style>
 </head>
 <body>
@@ -104,10 +106,12 @@
           <button id="drawBtn" type="button" aria-controls="cardTitle meaning orientation">一枚引く 🔮</button>
           <span id="resultMeta" class="meta" aria-live="polite"></span>
         </div>
-        <p id="message" class="affirm">今日も最高の1日を✨</p>
+
+        <!-- 🌟 ここに「自分全肯定！！」が出る -->
         <p id="message" class="affirm"></p>
+
         <p class="note">
-          占いは”今の自分を映す鏡😊”深刻になりすぎず、ヒントとして楽しんでくださいね✨<br>
+          占いは「今の自分を映す鏡😊」です。深刻になりすぎず、ヒントとして楽しんでくださいね✨<br>
           逆位置は「ブレーキの場所」や「視点の転換」を示すこともあります。
         </p>
       </section>
@@ -160,9 +164,9 @@ function drawOne(){
     titleEl.textContent = card.name;
     orientEl.textContent = reversed ? "逆位置" : "正位置";
     orientEl.style.color = reversed ? "var(--bad)" : "var(--good)";
-    msgEl.textContent = "いいね🎵";
     meaningEl.textContent = reversed ? card.rev : card.up;
     metaEl.textContent = `#${card.n}・${new Date().toLocaleString('ja-JP')}`;
+    msgEl.textContent = "🌟 自分全肯定！！ 🌟";
     cardEl.classList.add('flip');
   }, 80);
 }
