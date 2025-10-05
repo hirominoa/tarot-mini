@@ -158,6 +158,7 @@ function drawOne(){
     titleEl.textContent = card.name;
     orientEl.textContent = reversed ? "逆位置" : "正位置";
     orientEl.style.color = reversed ? "var(--bad)" : "var(--good)";
+    msgEl.textContent = "いいね🎵";
     meaningEl.textContent = reversed ? card.rev : card.up;
     metaEl.textContent = `#${card.n}・${new Date().toLocaleString('ja-JP')}`;
     cardEl.classList.add('flip');
