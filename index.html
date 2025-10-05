@@ -241,4 +241,76 @@
         <div class="actions">
           <button id="drawBtn" type="button" aria-controls="cardTitle meaning orientation">一枚引く 🔮</button>
           <span id="resultMeta" class="meta" aria-live="polite"></span>
+        </div>
+        <p class="note">
+          占いは「今の自分を映す鏡」。深刻に決めすぎず、ヒントとして楽しんでくださいね。<br>
+          逆位置は「ブレーキの場所」や「視点の転換」を示すこともあります。
+        </p>
+      </section>
+    </div>
 
+    <div class="footer">© 2025 Lunaria / Inner Light Works</div>
+  </div>
+
+<script>
+const DECK = [
+  { n:0, name:"0 愚者 (The Fool)", up:"自由・無邪気・新しい旅立ち。直感に従う。", rev:"衝動・無計画・現実逃避。足元を見直す。" },
+  { n:1, name:"I 魔術師 (The Magician)", up:"スタート・創造・コミュ力。道具は揃っている。", rev:"未熟・準備不足・器用貧乏。まず1つに集中。" },
+  { n:2, name:"II 女教皇 (The High Priestess)", up:"静けさ・知性・洞察。情報をよく読む。", rev:"感情過多・秘密・不安定。クールダウンを。" },
+  { n:3, name:"III 女帝 (The Empress)", up:"豊かさ・愛・育成。受け取る力。", rev:"甘やかし・過多・停滞。境界線を整える。" },
+  { n:4, name:"IV 皇帝 (The Emperor)", up:"安定・責任・リーダーシップ。決める時。", rev:"独裁・頑固・過管理。信頼して委ねる。" },
+  { n:5, name:"V 法王 (The Hierophant)", up:"伝統・学び・信頼。良き師との縁。", rev:"形式主義・固定観念。自分のやり方を試す。" },
+  { n:6, name:"VI 恋人 (The Lovers)", up:"選択・相思・価値観の一致。心のYESを。", rev:"優柔不断・迷い・三者。原点の選択基準へ。" },
+  { n:7, name:"VII 戦車 (The Chariot)", up:"前進・勝利・勢い。迷う前に動く。", rev:"空回り・焦り・分裂。方向合わせを先に。" },
+  { n:8, name:"VIII 力 (Strength)", up:"内なる強さ・慈愛・習慣化。静かな継続。", rev:"我慢のし過ぎ・自己否定。優しく整える。" },
+  { n:9, name:"IX 隠者 (The Hermit)", up:"探求・省察・一人時間。灯りは内側に。", rev:"孤立・閉塞・答えが遠い。人に訊く勇気を。" },
+  { n:10, name:"X 運命の輪 (Wheel of Fortune)", up:"転機・チャンス・流れに乗る。", rev:"停滞・タイミング合わず。焦らず整える。" },
+  { n:11, name:"XI 正義 (Justice)", up:"バランス・契約・公平。事実と向き合う。", rev:"不均衡・迷い・曖昧。基準を明確に。" },
+  { n:12, name:"XII 吊るされた男 (Hanged Man)", up:"献身・俯瞰・視点変更。待つ価値あり。", rev:"自己犠牲過多・停滞。手放す選択を。" },
+  { n:13, name:"XIII 死神 (Death)", up:"区切り・終わりと始まり。刷新の好機。", rev:"変化拒否・惰性。小さく終わらせて空ける。" },
+  { n:14, name:"XIV 節制 (Temperance)", up:"調和・節度・試行錯誤。ブレンドが鍵。", rev:"極端・過不足。ペース配分の再設計。" },
+  { n:15, name:"XV 悪魔 (The Devil)", up:"依存・魅了・快楽。仕組みの見直しを。", rev:"解放の兆し・執着ゆるむ。距離を置く。" },
+  { n:16, name:"XVI 塔 (The Tower)", up:"崩壊・雷・目覚め。偽りが落ちる。", rev:"被害最小・ヒビの修繕。学びを糧に。" },
+  { n:17, name:"XVII 星 (The Star)", up:"希望・インスピ・癒し。遠くの灯り。", rev:"期待過多・散漫。目標を具体化。" },
+  { n:18, name:"XVIII 月 (The Moon)", up:"直感・無意識・夢。夜明け前の揺らぎ。", rev:"疑心暗鬼・誤解。情報を明確に。" },
+  { n:19, name:"XIX 太陽 (The Sun)", up:"成功・活力・喜び。子どものように。", rev:"空回り・過信。基本に立ち返る。" },
+  { n:20, name:"XX 審判 (Judgement)", up:"再生・呼び覚まし・復活。届け、声。", rev:"遅延・未完了。未返信に返事を。" },
+  { n:21, name:"XXI 世界 (The World)", up:"成就・完成・統合。次の章へ。", rev:"未完・あと一歩。締めの一手を。" }
+];
+
+const cardEl = document.querySelector('.card');
+const titleEl = document.getElementById('cardTitle');
+const orientEl = document.getElementById('orientation');
+const meaningEl = document.getElementById('meaning');
+const metaEl = document.getElementById('resultMeta');
+const btn = document.getElementById('drawBtn');
+
+function drawOne(){
+  cardEl.classList.remove('flip');
+  void cardEl.offsetWidth;
+
+  const idx = Math.floor(Math.random() * DECK.length);
+  const reversed = Math.random() < 0.5;
+  const card = DECK[idx];
+
+  setTimeout(() => {
+    titleEl.textContent = card.name;
+    orientEl.textContent = reversed ? "逆位置" : "正位置";
+    orientEl.style.color = reversed ? "var(--bad)" : "var(--good)";
+    meaningEl.textContent = reversed ? card.rev : card.up;
+    metaEl.textContent = `#${card.n}・${new Date().toLocaleString('ja-JP')}`;
+    cardEl.classList.add('flip');
+  }, 80);
+}
+
+btn.addEventListener('click', drawOne);
+btn.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    drawOne();
+  }
+});
+</script>
+
+</body>
+</html>
