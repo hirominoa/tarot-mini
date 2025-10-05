@@ -7,14 +7,6 @@
   <meta name="description" content="Lunariaのワンカード占い🔮　ボタンひとつで今日のメッセージが届きます。">
   <style>
     .affirm {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  color: #d65db1;
-  margin-top: 8px;
-}
-
-    .affirm {
   margin: 8px 0 0;
   font-size: 16px;
   font-weight: 700;
@@ -156,6 +148,7 @@ const orientEl = document.getElementById('orientation');
 const meaningEl = document.getElementById('meaning');
 const metaEl = document.getElementById('resultMeta');
 const btn = document.getElementById('drawBtn');
+const msgEl = document.getElementById('message');
 
 function drawOne(){
   cardEl.classList.remove('flip');
